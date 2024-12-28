@@ -1,6 +1,7 @@
 -- return {}
 return {
   'ray-x/lsp_signature.nvim',
+  -- 'brunnre8/lsp_signature.nvim',
   event = 'LspAttach',
   lazy = true,
   opts = {},
