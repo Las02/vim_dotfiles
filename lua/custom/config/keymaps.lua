@@ -2,17 +2,17 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.keymap.set({ 'n' }, '<leader>uf', function()
-  require('lsp_signature').toggle_float_win()
-end, { silent = true, noremap = true, desc = 'toggle signature' })
+-- default to now show inline hints but give options to turn of and on
+vim.diagnostic.config { virtual_text = false }
+vim.keymap.set('n', '<leader>ud', function()
+  vim.diagnostic.config { virtual_text = false }
+end, { noremap = true, silent = true, desc = 'Toggle vim diagnostics' })
+vim.keymap.set('n', '<leader>ued', function()
+  vim.diagnostic.config { virtual_text = true }
+end, { noremap = true, silent = true, desc = 'Toggle vim diagnostics' })
 
-vim.keymap.set({ 'n' }, '<Leader>us', function()
-  vim.lsp.buf.signature_help()
-end, { silent = true, noremap = true, desc = 'toggle signature' })
+-- inlay hints
 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { 0 }, { 0 })
--- vim.keymap.set('n', '<leader>ui', function()
---   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { 0 }, { 0 })
--- end)
 
 vim.keymap.set({ 'v' }, '<C-c>', '"+y', {})
 
