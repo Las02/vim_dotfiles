@@ -56,4 +56,31 @@ vim.keymap.set('n', 'vr', function()
   change_dir_using_zoxide()
 end)
 
+vim.keymap.set('n', 'gt', function()
+  cwd = require('oil').get_current_dir()
+  local escaped_cwd = vim.fn.shellescape(cwd)
+  local tmux_cmd = string.format('tmux split-window -%s -c %s', 'h', escaped_cwd)
+  os.execute(tmux_cmd)
+end)
+
+-- https://www.reddit.com/r/neovim/comments/1czp9zr/how_to_copy_file_path_to_clipboard_in_oilnvim/
+vim.keymap.set('n', 'gy', function()
+  require('oil.actions').copy_entry_path.callback()
+  vim.fn.setreg('+', vim.fn.getreg(vim.v.register))
+end)
+
+-- https://www.reddit.com/r/neovim/comments/1czp9zr/how_to_copy_file_path_to_clipboard_in_oilnvim/
+vim.keymap.set('n', 'gr', function()
+  oil = require 'oil'
+  local entry = oil.get_cursor_entry()
+  local dir = oil.get_current_dir()
+
+  if not entry or not dir then
+    return
+  end
+
+  local relpath = vim.fn.fnamemodify(dir, ':.')
+  vim.fn.setreg('+', relpath .. entry.name)
+end)
+
 return M

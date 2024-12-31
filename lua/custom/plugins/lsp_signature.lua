@@ -15,7 +15,7 @@ return {
         border = 'rounded', -- double, rounded, single, shadow, none, or a table of borders
       },
       max_height = 1, -- max height of signature floating_window
-      -- max_width = 80,
+      max_width = 80,
       doc_lines = 0, -- crahses with max_height if this is not on
     }
   end,
