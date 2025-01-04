@@ -6,6 +6,7 @@
 
 -- default to now show inline hints but give options to turn of and on
 vim.diagnostic.config { virtual_text = false }
+
 vim.keymap.set('n', '<leader>ud', function()
   vim.diagnostic.config { virtual_text = false }
 end, { noremap = true, silent = true, desc = 'Toggle vim diagnostics' })

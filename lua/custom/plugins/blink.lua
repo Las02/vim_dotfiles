@@ -74,7 +74,7 @@ return {
     opts = {
       servers = {
         lua_ls = {},
-        basedpyright = {},
+        basedpyright = { filetypes = { 'python', 'snakemake' } },
       },
     },
     config = function(_, opts)

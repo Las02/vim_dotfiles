@@ -64,12 +64,14 @@ vim.keymap.set('n', 'gt', function()
 end)
 
 -- https://www.reddit.com/r/neovim/comments/1czp9zr/how_to_copy_file_path_to_clipboard_in_oilnvim/
-vim.keymap.set('n', 'gy', function()
+vim.keymap.set('n', 'gp', function()
   require('oil.actions').copy_entry_path.callback()
   vim.fn.setreg('+', vim.fn.getreg(vim.v.register))
 end)
 
 -- https://www.reddit.com/r/neovim/comments/1czp9zr/how_to_copy_file_path_to_clipboard_in_oilnvim/
+-- use this instead
+-- realpath -m --relative-to=../find_me/ok
 vim.keymap.set('n', 'gr', function()
   oil = require 'oil'
   local entry = oil.get_cursor_entry()
@@ -80,7 +82,8 @@ vim.keymap.set('n', 'gr', function()
   end
 
   local relpath = vim.fn.fnamemodify(dir, ':.')
-  vim.fn.setreg('+', relpath .. entry.name)
+  vim.fn.setreg('+', relpath .. entry.name) -- system clipboard
+  vim.fn.setreg('', relpath .. entry.name) -- to neovim clipeboard (?)
 end)
 
 return M
