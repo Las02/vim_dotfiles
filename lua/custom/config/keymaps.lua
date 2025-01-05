@@ -3,6 +3,9 @@
 -- Add any additional keymaps here
 --
 --
+vim.keymap.set('n', '<leader>q', function()
+  vim.api.nvim_set_current_line '# %%'
+end)
 
 -- default to now show inline hints but give options to turn of and on
 vim.diagnostic.config { virtual_text = false }
