@@ -11,15 +11,16 @@ return {
       { '<leader>s', require('fzf-lua').lsp_live_workspace_symbols, desc = 'Find Symbols' },
       { '<leader>f', require('fzf-lua').files, desc = 'Find Files' },
       { '<leader>w', require('fzf-lua').live_grep_native, desc = 'grep' },
+      { '/', require('fzf-lua').live_grep_curbuf, desc = 'grep' },
       {
-        ',f',
+        '<leader>gf',
         function()
           require('fzf-lua').files { cwd = '~' }
         end,
         desc = 'files root',
       },
       {
-        ',w',
+        '<leader>gw',
         function()
           require('fzf-lua').live_grep_native { cwd = '~' }
         end,

@@ -1,0 +1,95 @@
+-- return {}
+return {
+  'ThePrimeagen/harpoon',
+  branch = 'harpoon2',
+  dependencies = { 'nvim-lua/plenary.nvim' },
+  init = function()
+    local harpoon = require 'harpoon'
+
+    -- REQUIRED
+    harpoon:setup()
+    -- REQUIRED
+    --
+    vim.keymap.set('n', 'm', function()
+      harpoon.ui:toggle_quick_menu(harpoon:list())
+    end)
+    vim.keymap.set('n', '<C-h>', function()
+      harpoon:list():add()
+    end)
+
+    set_default = function()
+      vim.keymap.del('n', '1')
+      vim.keymap.del('n', '2')
+      vim.keymap.del('n', '3')
+      vim.keymap.del('n', '4')
+      vim.keymap.del('n', 'm')
+      vim.keymap.del('n', 'l')
+      -- vim.keymap.del('n', 's')
+    end
+
+    -- settings in menu
+    harpoon:extend {
+      UI_CREATE = function(cx)
+        vim.keymap.set('n', '<Enter>', function()
+          harpoon.ui:select_menu_item { vsplit = false }
+        end, { buffer = cx.bufnr })
+        vim.keymap.set('n', 's', function()
+          harpoon:list():add(vim.api.nvim_buf_get_name(0))
+        end)
+        vim.keymap.set('n', '1', function()
+          harpoon:list():select(1)
+          set_default()
+        end)
+        vim.keymap.set('n', '2', function()
+          harpoon:list():select(2)
+          set_default()
+        end)
+        vim.keymap.set('n', '3', function()
+          harpoon:list():select(3)
+          set_default()
+        end)
+        vim.keymap.set('n', '4', function()
+          harpoon:list():select(4)
+          set_default()
+        end)
+        vim.keymap.set('n', 'm', function()
+          harpoon:list():select(5)
+          set_default()
+        end)
+        vim.keymap.set('n', 'l', function()
+          harpoon:list():select(6)
+          set_default()
+        end)
+      end,
+    }
+
+    -- basic telescope configuration
+    local conf = require('telescope.config').values
+    local function toggle_telescope(harpoon_files)
+      local file_paths = {}
+      for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+      end
+
+      require('telescope.pickers')
+        .new({}, {
+          prompt_title = 'Harpoon',
+          finder = require('telescope.finders').new_table {
+            results = file_paths,
+          },
+          previewer = conf.file_previewer {},
+          sorter = conf.generic_sorter {},
+        })
+        :find()
+    end
+
+    -- vim.keymap.set('n', ',t', function()
+    --   toggle_telescope(harpoon:list())
+    -- end, { desc = 'Open harpoon window' })
+  end,
+  -- keys = function()
+  --   return {
+  --     { '<leader>s', require('harpoon').list():add(), desc = 'Find Symbols' },
+  --   }
+  -- end,
+}

@@ -7,6 +7,7 @@ return {
       { '<leader>j', '<cmd>Telescope buffers<cr>', desc = 'Find Files' },
       { '<leader>o', '<cmd>Telescope oldfiles<cr>', desc = 'Find Files' },
       { '<leader>a', '<cmd>Telescope commands<cr>', desc = 'Find Files' },
+      { '<leader>m', '<cmd>Telescope jumplist<cr>', desc = 'Find Files' },
       -- { "<leader>s", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Find Files" },
       { '<leader>e', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', desc = 'Find Files' },
       -- { "<leader>e", "<cmd>Telescope lsp_workspace_symbols query=searchTerm<cr>", desc = "Find Files" },

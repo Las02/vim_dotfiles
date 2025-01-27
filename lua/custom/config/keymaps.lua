@@ -1,8 +1,21 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+-- Harpoon
+
+-- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+-- vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+-- vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+-- vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+--
+-- -- Toggle previous & next buffers stored within Harpoon list
+-- vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+-- vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 --
 --
+-- vim.keymap.set('n', 'gd', function()
+--   vim.lsp.buf.definition()
+-- end)
 vim.keymap.set('n', '<leader>q', function()
   vim.api.nvim_set_current_line '# %%'
 end)
@@ -167,7 +180,7 @@ end, {})
 --   vim.api.nvim_command("normal! k")
 -- end
 
-vim.keymap.set('n', '<tab>', '<C-^>', {})
+-- vim.keymap.set('n', '<tab>', '<C-^>', {})
 vim.keymap.set('n', '<M-d>', '<C-d>M', {})
 vim.keymap.set('n', '<M-u>', '<C-u>M', {})
 vim.keymap.set('n', '<M-o>', '<C-o>', {})
@@ -324,4 +337,4 @@ vim.keymap.set('o', '=', '}', {})
 -- vim.keymap.set("n", "[e", "<cmd>cn<cr>", {})
 -- vim.keymap.set("n", "]e", "<cmd>cp<cr>", {})
 -- Remove some lazy vim default keymaps
--- vim.cmd 'source /home/las/.config/nvim/lua/custom/config/vimi.vim'
+vim.cmd 'source /home/las/.config/nvim/lua/custom/config/vimi.vim'

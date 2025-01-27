@@ -86,4 +86,31 @@ vim.keymap.set('n', 'gr', function()
   vim.fn.setreg('', relpath .. entry.name) -- to neovim clipeboard (?)
 end)
 
+current_change_dir_using_fd = function()
+  require('fzf-lua').fzf_exec('fd --type directory', {
+    cwd = '.',
+    -- we need to transform the output of fd to work with oil
+    fn_transform = function(x)
+      x = string.sub(x, 1, -2)
+      return vim.loop.cwd() .. '/' .. x
+    end,
+    actions = {
+      ['default'] = function(selected, opts)
+        require('oil').open(selected[1])
+        -- increment dir score of dir in zoxide
+        -- vim.cmd('silent !zoxide add ' .. selected[1])
+      end,
+      ['ctrl-r'] = function(selected, opts)
+        change_dir_using_zoxide()
+      end,
+    },
+    prompt = 'D| ',
+  })
+end
+vim.keymap.set('n', '<leader>gr', current_change_dir_using_fd)
+
+-- vim.keymap.set('n', '<leader>n', function()
+--   require('oil').toggle_float()
+-- end, {})
+
 return M
