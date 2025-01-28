@@ -1,3 +1,4 @@
+-- ~/.local/share/nvim/lazy/arrow.nvim/lua/arrow/
 return {
   'otavioschwanck/arrow.nvim',
   dependencies = {

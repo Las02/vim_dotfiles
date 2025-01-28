@@ -6,9 +6,12 @@
 --   config = function() end,
 -- }
 return {
-  "stevearc/oil.nvim",
-  version = "*",
-  opts = { keymaps = { ["l"] = "actions.select" } },
+  'stevearc/oil.nvim',
+  version = '*',
+  opts = { keymaps = { ['l'] = 'actions.select' } },
   vscode = false,
-  dependencies = { { "echasnovski/mini.icons", opts = {} } },
+  dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+  init = function()
+    require('oil').setup { watch_for_changes = true }
+  end,
 }
