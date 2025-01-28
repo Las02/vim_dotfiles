@@ -6,6 +6,14 @@ return {
     -- or if using `mini.icons`
     -- { "echasnovski/mini.icons" },
   },
+  -- init = function()
+  --   vim.keymap.set('n', '<leader>5', function()
+  --     local persist = require 'arrow.buffer_persist'
+  --     bufnr = 1
+  --     local bookmarks = persist.get_bookmarks_by(bufnr) or {}
+  --     print(vim.inspect(bookmarks))
+  --   end)
+  -- end,
   opts = {
     show_icons = true,
     mappings = {
