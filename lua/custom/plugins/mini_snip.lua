@@ -4,7 +4,7 @@ return {
   opts = {
     mappings = {
       -- Expand snippet at cursor position. Created globally in Insert mode.
-      expand = '<C-j>',
+      expand = '<C-y>',
 
       -- Interact with default `expand.insert` session.
       -- Created for the duration of active session(s)
@@ -15,6 +15,7 @@ return {
     -- Setting snippts manually with lua, and plugin options
     snippets = {
       { prefix = '#', body = '# %%', desc = 'Snip' },
+      { prefix = 'ids', body = 'import pandas as pd\nimport numpy as np{}', desc = 'Snip' },
     },
   },
   -- Options to run when plugin is loaded
