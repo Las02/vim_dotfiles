@@ -75,6 +75,8 @@ return {
       servers = {
         lua_ls = {},
         basedpyright = { filetypes = { 'python', 'snakemake' } },
+        -- rust_analyzer = { filetypes = { 'rust' } },
+        rust_analyzer = {},
       },
     },
     config = function(_, opts)

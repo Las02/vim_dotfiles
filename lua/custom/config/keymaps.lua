@@ -194,9 +194,9 @@ vim.keymap.set('n', '<M-u>', '<C-u>M', {})
 vim.keymap.set('n', '<M-o>', '<C-o>', {})
 vim.keymap.set('n', '<M-i>', '<C-i>', {})
 
-vim.keymap.set('n', '<leader><space>', function()
-  vim.cmd 'JupyterSendCell'
-end, {})
+-- vim.keymap.set('n', '<leader><space>', function()
+--   vim.cmd 'JupyterSendCell'
+-- end, {})
 -- vim.keymap.set("n", "<enter>", function()
 --   vim.cmd("JupyterSendCell")
 -- end, {})
