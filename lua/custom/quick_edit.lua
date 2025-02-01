@@ -36,11 +36,11 @@ fancy_gd = function()
   -- end
 end
 
-vim.api.nvim_create_autocmd('BufLeave', {
-  callback = function()
-    LAST_JUMP = 'buffer'
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufLeave', {
+--   callback = function()
+--     LAST_JUMP = 'buffer'
+--   end,
+-- })
 -- vim.api.nvim_create_autocmd('BufEnter', {
 --   callback = function()
 --     new_row, new_column = unpack(vim.api.nvim_win_get_cursor(0))
@@ -52,10 +52,10 @@ vim.api.nvim_create_autocmd('BufLeave', {
 
 gd_go_back = function()
   if LAST_JUMP == 'None' then
-  elseif LAST_JUMP == 'buffer' then
-    -- Go to alternative file
-    -- vim.api.nvim_feedkeys('<C-^>', 'n', true)
-    vim.cmd 'e #'
+  -- elseif LAST_JUMP == 'buffer' then
+  --   -- Go to alternative file
+  --   -- vim.api.nvim_feedkeys('<C-^>', 'n', true)
+  --   vim.cmd 'e #'
   elseif POSITION_AT == 'NEW' then
     -- save new position
     new_row, new_column = unpack(vim.api.nvim_win_get_cursor(0))
@@ -82,13 +82,20 @@ end
 vim.keymap.set('n', 'gd', function()
   fancy_gd()
 end)
-vim.keymap.set('n', '<tab>', function()
+-- vim.keymap.set('n', '<tab>', function()
+vim.keymap.set('n', 'q', function()
   gd_go_back()
 end)
 -- vim.keymap.set('n', '<S-tab>', function()
---   vim.cmd 'e #'
---   -- vim.api.nvim_feedkeys('<C-^>', 'n', true)
+--   if LAST_JUMP == 'buffer' then
+--     LAST_JUMP = 'GD'
+--     gd_go_back()
+--   else
+--     vim.cmd 'e #'
+--   end
+-- vim.api.nvim_feedkeys('<C-^>', 'n', true)
 -- end)
-vim.keymap.set('n', '<S-tab>', '<C-^>')
+-- vim.keymap.set('n', '<S-tab>', '<C-^>') -- SIMPLE ALTERNATIVE HERE
+vim.keymap.set('n', '<tab>', '<C-^>') -- SIMPLE ALTERNATIVE HERE
 
 return M

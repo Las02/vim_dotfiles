@@ -1,25 +1,25 @@
 return {
-  "jpalardy/vim-slime",
+  'jpalardy/vim-slime',
   init = function()
     vim.g.slime_no_mappings = 1
-    vim.g.slime_target = "tmux"
+    vim.g.slime_target = 'tmux'
     vim.g.slime_bracketed_paste = 1 -- use 'interact' cmd to go to interactive
-    vim.g.slime_default_config = { socket_name = "default", target_pane = "bottom" }
+    vim.g.slime_default_config = { socket_name = 'default', target_pane = 'bottom' }
     vim.slime_dont_ask_default = 1
-    vim.g.slime_cell_delimiter = "# %%"
+    vim.g.slime_cell_delimiter = '# %%'
   end,
-  keys = {
-    {
-      "<enter>",
-      function()
-        local t = function(keycode)
-          return vim.api.nvim_replace_termcodes(keycode, true, false, true)
-        end
-        vim.api.nvim_feedkeys(t("<Plug>SlimeSendCell"), "n", true)
-      end,
-      desc = "Slime Send Cell",
-    },
-  },
+  -- keys = {
+  --   {
+  --     "<enter>",
+  --     function()
+  --       local t = function(keycode)
+  --         return vim.api.nvim_replace_termcodes(keycode, true, false, true)
+  --       end
+  --       vim.api.nvim_feedkeys(t("<Plug>SlimeSendCell"), "n", true)
+  --     end,
+  --     desc = "Slime Send Cell",
+  --   },
+  -- },
   -- nmap <leader>scc <Plug>SlimeSendCell
 }
 -- return {
