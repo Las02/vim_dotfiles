@@ -3,6 +3,11 @@
 -- Add any additional keymaps here
 -- Harpoon
 
+-- vim.keymap.set('n', 'z', 'za')
+-- vim.keymap.set('v', '<', '<<')
+-- vim.keymap.set('v', '>', '>>')
+-- vim.keymap.set('n', '<', '<<')
+-- vim.keymap.set('n', '>', '>>')
 -- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
 -- vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
 -- vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)

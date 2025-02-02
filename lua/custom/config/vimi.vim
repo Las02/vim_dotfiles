@@ -18,4 +18,5 @@ nnoremap { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
 
 " if not explicitly configured, it defaults to `screen`
 " autocmd BufWritePost *.py LspRestart
+"
   
