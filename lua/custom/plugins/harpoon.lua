@@ -25,10 +25,13 @@ return {
       vim.keymap.del('n', '2')
       vim.keymap.del('n', '3')
       vim.keymap.del('n', '4')
+      -- vim.keymap.set('n', 'm', function()
+      --   harpoon.ui:toggle_quick_menu(harpoon:list())
+      -- end)
       -- vim.keymap.del('n', 'm')
       -- vim.keymap.del('n', 'l')
       -- vim.keymap.del('n', 's')
-      vim.keymap.set('n', 'f', '<cmd> HopWord <cr>')
+      -- vim.keymap.set('n', 's', '<cmd> HopWord <cr>')
     end
 
     -- settings in menu
@@ -37,6 +40,10 @@ return {
         vim.keymap.set('n', '<Enter>', function()
           harpoon.ui:select_menu_item { vsplit = false }
         end, { buffer = cx.bufnr })
+        -- vim.keymap.set('n', 'm', function()
+        --   vim.cmd('e' .. vim.loop.cwd() .. '/Makefile')
+        --   set_default()
+        -- end)
         vim.keymap.set('n', 'f', function()
           harpoon.ui:toggle_quick_menu(harpoon:list())
           harpoon:list():add()

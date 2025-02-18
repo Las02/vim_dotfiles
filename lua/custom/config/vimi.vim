@@ -6,7 +6,7 @@ command! Q :q
 " :inoremap <S-Tab> <C-V><Tab>
 
 
-set jumpoptions=stack
+" set jumpoptions=stack
 nnoremap = :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
 nnoremap { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
 " " for all buffers

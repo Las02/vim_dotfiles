@@ -16,11 +16,11 @@ return {
     opts = {
       completion = {
         -- Dont complete in cmdline eg :x
-        menu = {
-          auto_show = function(ctx)
-            return ctx.mode ~= 'cmdline'
-          end,
-        },
+        -- menu = {
+        --   auto_show = function(ctx)
+        --     return ctx.mode ~= 'cmdline'
+        --   end,
+        -- },
         accept = {
           -- experimental auto-brackets support
           auto_brackets = {

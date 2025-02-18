@@ -6,6 +6,7 @@ return {
     require('neorg').setup {
       load = {
         ['core.defaults'] = {},
+        ['core.text-objects'] = {},
         ['core.itero'] = {
           config = {
             iterables = { 'unordered_list%d', 'ordered_list%d', 'quote%d' },

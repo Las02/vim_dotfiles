@@ -16,8 +16,12 @@ return {
   end,
   keys = function()
     return {
-      { '<leader>s', require('fzf-lua').lsp_live_workspace_symbols, desc = 'Find Symbols' },
       { '<leader>f', require('fzf-lua').files, desc = 'Find Files' },
+      -- { '<leader>s', require('fzf-lua').lsp_document_symbols, desc = 'Find Symbols' },
+      -- { '<leader>as', require('fzf-lua').lsp_live_workspace_symbols, desc = 'Find Symbols' },
+      -- { '<leader>as', require('fzf-lua').lsp_incoming_calls, desc = 'Find Symbols' },
+      -- { '<leader>w', require('fzf-lua').lgrep_curbuf, desc = 'grep' },
+      -- { '<leader>aw', require('fzf-lua').live_grep_native, desc = 'grep' },
       { '<leader>w', require('fzf-lua').live_grep_native, desc = 'grep' },
       {
         '<leader>m',
