@@ -20,7 +20,7 @@ return {
       -- { "<leader>s", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Find Files" },
       { '<leader>e', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', desc = 'Find Files' },
       -- { "<leader>e", "<cmd>Telescope lsp_workspace_symbols query=searchTerm<cr>", desc = "Find Files" },
-      -- { "<leader>gw", "<cmd>Telescope vimgrep.new<cr>", desc = "Find Files" },
+      -- { '<leader>aw', '<cmd>Telescope vimgrep.new<cr>', desc = 'Find Files' },
       -- { '<leader>w', '<cmd>Telescope live_grep<cr>', desc = 'Find Files' },
     }
   end,

@@ -45,11 +45,11 @@ return {
         '<Plug>(neorg.promo.promote.nested)',
         desc = 'change folds',
       },
-      {
-        '<leader>cn',
-        '<Plug>(neorg.dirman.new-note)',
-        desc = 'Create Neorg file',
-      },
+      -- {
+      --   '<leader>cn',
+      --   '<Plug>(neorg.dirman.new-note)',
+      --   desc = 'Create Neorg file',
+      -- },
     }
   end,
 }

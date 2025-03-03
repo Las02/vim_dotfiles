@@ -74,10 +74,10 @@ return {
     -- example using `opts` for defining servers
     opts = {
       servers = {
+        -- rust_analyzer = {},
         lua_ls = {},
         basedpyright = { filetypes = { 'python', 'snakemake' } },
-        -- rust_analyzer = { filetypes = { 'rust' } },
-        rust_analyzer = {},
+        rust_analyzer = { filetypes = { 'rust' } },
       },
     },
     config = function(_, opts)

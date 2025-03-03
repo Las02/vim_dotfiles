@@ -3,7 +3,20 @@
 -- Add any additional keymaps here
 -- Harpoon
 
-local showSymbolFinder = function()
+local classsymbol = function(optsa)
+  local opts = {
+    symbols = {
+      'class',
+      'function',
+    },
+  }
+  if vim.bo.filetype == 'vim' then
+    opts.symbols = { 'function' }
+  end
+  require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
+end
+
+local showSymbol = function(optsa)
   local opts = {
     symbols = {
       'interface',
@@ -19,7 +32,25 @@ local showSymbolFinder = function()
   require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
 end
 
-vim.keymap.set('n', '<leader>as', showSymbolFinder)
+vim.keymap.set('n', '<leader>c', function()
+  classsymbol {
+    symbols = {
+      'class',
+    },
+  }
+end)
+
+vim.keymap.set('n', '<leader>as', function()
+  showSymbol {
+    symbols = {
+      'interface',
+      'class',
+      'constructor',
+      'method',
+      'function',
+    },
+  }
+end)
 
 -- vim.keymap.set('n', 'z', 'za')
 -- vim.keymap.set('v', '<', '<<')
