@@ -3,6 +3,10 @@
 -- Add any additional keymaps here
 -- Harpoon
 
+vim.keymap.set('n', 'Q', 'q')
+
+vim.keymap.set('i', '<c-s>', vim.lsp.buf.signature_help)
+
 local classsymbol = function(optsa)
   local opts = {
     symbols = {
