@@ -949,7 +949,7 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 
   -- Add my stuff from Lazyvim
-  dofile '/home/las/.config/nvim/lua/custom/config/keymaps.lua', -- This executes a lua file
+  dofile '/Users/lasse/.config/nvim/lua/custom/config/keymaps.lua', -- This executes a lua file
 
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
