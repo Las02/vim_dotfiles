@@ -345,4 +345,4 @@ vim.keymap.set('o', '=', '}', {})
 -- vim.keymap.set("n", "[e", "<cmd>cn<cr>", {})
 -- vim.keymap.set("n", "]e", "<cmd>cp<cr>", {})
 -- Remove some lazy vim default keymaps
-vim.cmd 'source /home/las/.config/nvim/lua/custom/config/vimi.vim'
+vim.cmd 'source /Users/lasse/.config/nvim/lua/custom/config/vimi.vim'
