@@ -617,6 +617,8 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         rust_analyzer = { filetypes = { 'rust' } },
+        -- sqlls = { filetypes = { 'sql' } },
+        sql_language_server  = { filetypes = { 'sql' } },
         -- clangd = {},
         -- gopls = {},
         basedpyright = { filetypes = { 'python', 'snakemake' } },
