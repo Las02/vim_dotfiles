@@ -78,8 +78,9 @@ return {
         lua_ls = {},
         basedpyright = { filetypes = { 'python', 'snakemake' } },
         rust_analyzer = { filetypes = { 'rust' } },
-        -- sqlls = { filetypes = { 'sql' } },
-        sql_language_server = { filetypes = { 'sql' } },
+        deno  = {filetypes   = {"javascript"}},
+        sqlls = { filetypes = { 'sql' } },
+        -- sql_language_server = { filetypes = { 'sql' } },
       },
     },
     config = function(_, opts)
