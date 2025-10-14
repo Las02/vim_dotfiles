@@ -622,7 +622,7 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         basedpyright = { filetypes = { 'python', 'snakemake' } },
-        deno  = {filetypes   = {"javascript"}},
+        -- typescript_language_server  = {filetypes   = {"javascript"}},
         -- pyright = { filetypes = { 'python', 'snakemake' } },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -631,7 +631,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
         --
 
         lua_ls = {
@@ -981,5 +981,31 @@ require('lazy').setup({
   },
 })
 
+send_slime = function()
+  local t = function(keycode)
+    return vim.api.nvim_replace_termcodes(keycode, true, false, true)
+  end
+  vim.api.nvim_feedkeys(t '<Plug>SlimeSendCell', 'n', true)
+end
+send_slime_v = function()
+  local t = function(keycode)
+    return vim.api.nvim_replace_termcodes(keycode, true, false, true)
+  end
+  vim.api.nvim_feedkeys(t '<Plug>SlimeRegionSend', 'n', true)
+end
+
+ENABLE_SLIME = false
+vim.keymap.set('n', '<leader>us', function()
+  if ENABLE_SLIME then
+    ENABLE_SLIME = false
+    vim.keymap.set('n', '<enter>', '<enter>')
+    vim.keymap.set('v', '<enter>', '<enter>')
+  else
+    ENABLE_SLIME = true
+    vim.keymap.set('n', '<enter>', send_slime)
+    vim.keymap.set('v', '<enter>', send_slime_v)
+  end
+end)
+vim.keymap.set('n', '<tab>', '<C-^>') -- SIMPLE ALTERNATIVE HERE
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
