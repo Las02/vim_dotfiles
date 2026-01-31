@@ -1,4 +1,5 @@
 --[[
+--
 
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
@@ -247,12 +248,28 @@ require('lazy').setup({
     'lewis6991/gitsigns.nvim',
     opts = {
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
+        add = { text = '┃' },
+        change = { text = '┃' },
         delete = { text = '_' },
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
+        untracked = { text = '┆' },
       },
+      signs_staged = {
+        add = { text = '┃' },
+        change = { text = '┃' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked = { text = '┆' },
+      },
+      -- signs = {
+      --   add = { text = '+' },
+      --   change = { text = '~' },
+      --   delete = { text = '_' },
+      --   topdelete = { text = '‾' },
+      --   changedelete = { text = '~' },
+      -- },
     },
   },
 
@@ -517,7 +534,7 @@ require('lazy').setup({
           -- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- Find references for the word under your cursor.
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -1009,3 +1026,24 @@ end)
 vim.keymap.set('n', '<tab>', '<C-^>') -- SIMPLE ALTERNATIVE HERE
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+vim.lsp.enable 'copilot'
+
+-- toggle_qf = function()
+--   local qf_exists = false
+--   for _, win in pairs(vim.fn.getwininfo()) do
+--     if win['quickfix'] == 1 then
+--       qf_exists = true
+--     end
+--   end
+--   if qf_exists == true then
+--     vim.cmd 'cclose'
+--     return
+--   end
+--   if not vim.tbl_isempty(vim.fn.getqflist()) then
+--     vim.cmd 'copen'
+--   end
+-- end
+-- vim.keymap.set('n', '<leader>c', '<cmd>cclose<CR>')
+-- vim.keymap.set('n', '<leader>c', toggle_qf)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+vim.keymap.set('n', 'gn', vim.lsp.buf.rename)

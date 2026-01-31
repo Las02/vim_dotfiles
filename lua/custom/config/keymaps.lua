@@ -36,13 +36,13 @@ local showSymbol = function(optsa)
   require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
 end
 
-vim.keymap.set('n', '<leader>c', function()
-  classsymbol {
-    symbols = {
-      'class',
-    },
-  }
-end)
+-- vim.keymap.set('n', '<leader>c', function()
+--   classsymbol {
+--     symbols = {
+--       'class',
+--     },
+--   }
+-- end)
 
 vim.keymap.set('n', '<leader>as', function()
   showSymbol {

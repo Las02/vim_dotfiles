@@ -26,6 +26,26 @@ return {
     --
     -- See :h blink-cmp-config-keymap for defining your own keymap
     keymap = { preset = 'super-tab' },
+    -- keymap = {
+    --   ['<Tab>'] = {
+    --     'snippet_forward',
+    --     function() -- sidekick next edit suggestion
+    --       return require('sidekick').nes_jump_or_apply()
+    --     end,
+    -- function() -- if you are using Neovim's native inline completions
+    --   return vim.lsp.inline_completion.get()
+    -- end,
+    -- function(cmp)
+    --   if cmp.snippet_active() then
+    --     return cmp.accept()
+    --   else
+    --     return cmp.select_and_accept()
+    --   end
+    -- end,
+    --
+    --     'fallback',
+    --   },
+    -- },
 
     appearance = {
       -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
