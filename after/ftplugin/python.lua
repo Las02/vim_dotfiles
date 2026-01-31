@@ -38,22 +38,18 @@ end
 
 local function get_repl_cmd()
   if is_uv_project() then
-    -- uv project: check pyproject.toml dependencies
+    -- uv project: check pyproject.toml for jupyter, otherwise ipython
     if has_uv_dependency('jupyter') then
       return 'uv run jupyter console'
-    elseif has_uv_dependency('ipython') then
-      return 'uv run ipython'
     else
-      return 'uv run python'
+      return 'uv run ipython'
     end
   else
-    -- pip project: check executables in PATH
+    -- pip project: check for jupyter in PATH, otherwise ipython
     if vim.fn.executable('jupyter') == 1 then
       return 'jupyter console'
-    elseif vim.fn.executable('ipython') == 1 then
-      return 'ipython'
     else
-      return 'python'
+      return 'ipython'
     end
   end
 end
