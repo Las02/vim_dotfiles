@@ -68,9 +68,11 @@ vim.keymap.set('n', '<leader>us', function()
     -- Toggle ON: create pane to the right and set keymap
     ENABLE_SLIME = true
     local repl_cmd = get_repl_cmd()
-    -- Create a new pane to the right, run REPL, and capture its ID
-    local pane_id = vim.fn.system('tmux split-window -h -P -F "#{pane_id}" "' .. repl_cmd .. '"'):gsub('%s+', '')
+    -- Create a new pane to the right (shell) without switching focus, then send REPL command
+    local pane_id = vim.fn.system('tmux split-window -h -d -P -F "#{pane_id}"'):gsub('%s+', '')
     SLIME_PANE_ID = pane_id
+    -- Send the REPL command to the pane (pane stays alive when REPL exits)
+    vim.fn.system('tmux send-keys -t ' .. pane_id .. ' "' .. repl_cmd .. '" Enter')
     -- Configure slime to target the new pane
     vim.g.slime_default_config = { socket_name = 'default', target_pane = pane_id }
     vim.b.slime_config = { socket_name = 'default', target_pane = pane_id }
