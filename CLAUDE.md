@@ -1,37 +1,82 @@
 # Neovim Configuration
 
-Based on kickstart.nvim.
+Personal Neovim configuration based on kickstart.nvim, tailored for Python/data science workflows.
 
-## Python Development with vim-slime
+## Architecture
 
-The slime integration allows sending code cells to a Python REPL in a tmux pane.
+- **Plugin Manager**: lazy.nvim with modular plugin specs in `lua/custom/plugins/`
+- **LSP**: nvim-lspconfig + Mason for automatic server installation
+- **Completion**: blink.cmp (configured in `lua/custom/plugins/newblink.lua`)
+- **Formatting**: conform.nvim (ruff for Python, stylua for Lua)
 
-### Toggle: `<leader>us`
+## Key Files
 
-- **ON**: Creates a tmux pane to the right, starts appropriate REPL, sets `<enter>` to send code cells
-- **OFF**: Restores `<enter>` to default, closes the tmux pane
+| File | Purpose |
+|------|---------|
+| `init.lua` | Core configuration, lazy.nvim setup, base keymaps |
+| `lua/custom/config/keymaps.lua` | Custom keybindings and helper functions |
+| `lua/custom/plugins/*.lua` | Plugin specifications (lazy.nvim format) |
+| `after/ftplugin/python.lua` | Python-specific REPL integration |
 
-### REPL Selection (priority order)
+## Python REPL Integration (vim-slime)
 
-1. `jupyter console` - if jupyter is available
-2. `ipython` - if ipython is available
-3. `python` - fallback
+Toggle with `<leader>us`. Creates a tmux pane and starts an appropriate REPL.
 
-### Project Detection
+### Implementation Details
 
-**uv projects** (detected by `uv.lock` in cwd):
-- Parses `pyproject.toml` to check `[project.dependencies]` for jupyter/ipython
-- Runs commands with `uv run <command>`
+- **Config**: `lua/custom/plugins/jupkern.lua` - vim-slime base configuration
+- **Toggle Logic**: `after/ftplugin/python.lua` - handles pane creation/destruction
 
-**pip projects**:
-- Checks for executables in PATH via `vim.fn.executable()`
-- Runs commands directly
+### REPL Detection (`after/ftplugin/python.lua`)
+
+```
+is_uv_project()     -> checks for uv.lock in cwd
+has_uv_dependency() -> parses pyproject.toml [project.dependencies]
+get_repl_cmd()      -> returns appropriate command based on detection
+```
+
+**Priority**:
+1. uv projects: `uv run jupyter console` or `uv run ipython`
+2. Standard: `jupyter console` or `ipython` (via `vim.fn.executable()`)
 
 ### Cell Delimiter
 
-Code cells are delimited by `# %%` comments.
+`# %%` (configured via `vim.g.slime_cell_delimiter`)
 
-### Relevant Files
+## tmux Integration
 
-- `after/ftplugin/python.lua` - Python-specific slime toggle and keymaps
-- `lua/custom/plugins/jupkern.lua` - vim-slime plugin configuration
+Several features rely on tmux:
+
+- **REPL**: Creates split pane, sends code via vim-slime
+- **Makefile runner**: Sends commands to tmux window `:2`
+- **DataFrame viewer**: Uses visidata in tmux window `:2`
+
+Global state variables:
+- `ENABLE_SLIME` - tracks REPL toggle state
+- `SLIME_PANE_ID` - stores tmux pane ID for cleanup
+- `_G.FILENAME` - stores selected Makefile target
+
+## LSP Configuration
+
+Servers defined in `init.lua`:
+- `basedpyright` - Python (also handles snakemake)
+- `lua_ls` - Lua with Neovim API support
+- `rust_analyzer` - Rust
+- `ts_ls` - TypeScript/JavaScript
+- `sqlls` - SQL
+
+## Navigation Plugins
+
+| Plugin | Key | Description |
+|--------|-----|-------------|
+| fzf-lua | `<leader>f`, `<leader>w`, `/` | File/grep search |
+| Harpoon | `m`, `<C-h>` | Quick file bookmarks |
+| Oil.nvim | `<leader>n` | File explorer |
+| Hop | `s` | Word jumping |
+
+## Conventions
+
+- Leader key: `<Space>`
+- Filetype configs go in `after/ftplugin/`
+- New plugins go in `lua/custom/plugins/`
+- Disabled/experimental code in `lua/custom/not_used/`
