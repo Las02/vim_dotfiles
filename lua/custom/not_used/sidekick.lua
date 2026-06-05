@@ -15,7 +15,6 @@ return {
   },
   keys = {
     {
-      -- '<S-tab>',
       '=',
       function()
         local Nes = require 'sidekick.nes'
@@ -23,19 +22,14 @@ return {
           Nes.jump()
           Nes.apply()
         end
-        -- if there is a next edit, jump to it, otherwise apply it if any
-        -- if not require('sidekick').nes_jump_or_apply() then
-        --   return '<Tab>' -- fallback to normal tab
-        -- end
       end,
-      expr = true,
       desc = 'Goto/Apply Next Edit Suggestion',
     },
     {
       '<leader>a',
       function()
         require('sidekick.cli').send { msg = '{file}' }
-        vim.fn.system { 'tmux', 'select-window', '-t', ':2' } -- does not write message.. nice
+        vim.fn.system { 'tmux', 'select-window', '-t', ':2' }
       end,
       mode = { 'n' },
       desc = 'Send File',
@@ -43,8 +37,13 @@ return {
     {
       '<leader>a',
       function()
-        require('sidekick.cli').send { msg = '{this}' }
-        vim.fn.system { 'tmux', 'select-window', '-t', ':2' } -- does not write message.. nice
+        -- Exit visual mode first to prevent newline insertion
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+        -- Small delay to ensure we've exited visual mode
+        vim.defer_fn(function()
+          require('sidekick.cli').send { msg = '{this}' }
+          vim.fn.system { 'tmux', 'select-window', '-t', ':2' }
+        end, 10)
       end,
       mode = { 'v' },
       desc = 'Send Visual Selection',

@@ -23,30 +23,30 @@ return {
       -- { '<leader>aw', require('fzf-lua').lgrep_curbuf, desc = 'grep' },
       -- { '<leader>aw', require('fzf-lua').live_grep_native, desc = 'grep' },
       { '<leader>w', require('fzf-lua').live_grep_native, desc = 'grep' },
-      {
-        '<leader>m',
-        function()
-          old_row_tmp, old_column_tmp = unpack(vim.api.nvim_win_get_cursor(0))
-          old_buf_tmp = vim.api.nvim_buf_get_name(0)
-          require('fzf-lua').marks {
-            actions = {
-              ['enter'] = function(selected, opts)
-                require('fzf-lua').actions.goto_mark(selected)
-                POSITION_AT = 'NEW'
-                LAST_JUMP = 'GD'
-                old_row = old_row_tmp
-                old_column = old_column_tmp
-                old_buf = old_buf_tmp
-              end,
-              ['ctrl-d'] = function()
-                vim.cmd 'delmarks A-Z0-9'
-                MARK_TO_SET = 1
-              end,
-            },
-          }
-        end,
-        desc = 'marks',
-      },
+      -- {
+      --   '<leader>m',
+      --   function()
+      --     old_row_tmp, old_column_tmp = unpack(vim.api.nvim_win_get_cursor(0))
+      --     old_buf_tmp = vim.api.nvim_buf_get_name(0)
+      --     require('fzf-lua').marks {
+      --       actions = {
+      --         ['enter'] = function(selected, opts)
+      --           require('fzf-lua').actions.goto_mark(selected)
+      --           POSITION_AT = 'NEW'
+      --           LAST_JUMP = 'GD'
+      --           old_row = old_row_tmp
+      --           old_column = old_column_tmp
+      --           old_buf = old_buf_tmp
+      --         end,
+      --         ['ctrl-d'] = function()
+      --           vim.cmd 'delmarks A-Z0-9'
+      --           MARK_TO_SET = 1
+      --         end,
+      --       },
+      --     }
+      --   end,
+      --   desc = 'marks',
+      -- },
       { '/', require('fzf-lua').live_grep_curbuf, desc = 'grep' },
       {
         '<leader>gf',

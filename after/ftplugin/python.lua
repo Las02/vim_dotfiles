@@ -24,9 +24,9 @@ local function has_uv_dependency(pkg)
   local content = vim.fn.readfile(pyproject)
   local in_dependencies = false
   for _, line in ipairs(content) do
-    if line:match('^%[project%]') or line:match('^dependencies%s*=') then
+    if line:match '^%[project%]' or line:match '^dependencies%s*=' then
       in_dependencies = true
-    elseif line:match('^%[') and not line:match('^%[project%]') then
+    elseif line:match '^%[' and not line:match '^%[project%]' then
       in_dependencies = false
     end
     if in_dependencies and line:lower():match('["\']' .. pkg .. '["\',><=~%s%]]') then
@@ -39,14 +39,14 @@ end
 local function get_repl_cmd()
   if is_uv_project() then
     -- uv project: check pyproject.toml for jupyter, otherwise ipython
-    if has_uv_dependency('jupyter') then
+    if has_uv_dependency 'jupyter' then
       return 'uv run jupyter console'
     else
       return 'uv run ipython'
     end
   else
     -- pip project: check for jupyter in PATH, otherwise ipython
-    if vim.fn.executable('jupyter') == 1 then
+    if vim.fn.executable 'jupyter' == 1 then
       return 'jupyter console'
     else
       return 'ipython'
@@ -69,6 +69,7 @@ vim.keymap.set('n', '<leader>us', function()
     ENABLE_SLIME = true
     local repl_cmd = get_repl_cmd()
     -- Create a new pane to the right (shell) without switching focus, then send REPL command
+    -- local pane_id = vim.fn.system('tmux split-window -v -d -P -F "#{pane_id}"'):gsub('%s+', '')
     local pane_id = vim.fn.system('tmux split-window -h -d -P -F "#{pane_id}"'):gsub('%s+', '')
     SLIME_PANE_ID = pane_id
     -- Send the REPL command to the pane (pane stays alive when REPL exits)
@@ -80,3 +81,55 @@ vim.keymap.set('n', '<leader>us', function()
     vim.notify('Slime enabled (' .. repl_cmd .. ', pane: ' .. pane_id .. ')', vim.log.levels.INFO)
   end
 end)
+
+require('quarto').setup {
+  debug = false,
+  closePreviewOnExit = true,
+  lspFeatures = {
+    enabled = true,
+    chunks = 'curly',
+    languages = { 'r', 'python', 'julia', 'bash', 'html' },
+    diagnostics = {
+      enabled = true,
+      triggers = { 'BufWritePost' },
+    },
+    completion = {
+      enabled = true,
+    },
+  },
+  codeRunner = {
+    enabled = true,
+    default_method = 'slime', -- "molten", "slime", "iron" or <function>
+    ft_runners = {}, -- filetype to runner, ie. `{ python = "molten" }`.
+    -- Takes precedence over `default_method`
+    never_run = { 'yaml' }, -- filetypes which are never sent to a code runner
+  },
+}
+
+vim.keymap.set('n', '<leader>q', function()
+  vim.api.nvim_set_current_line '# %%'
+end)
+vim.keymap.set('n', '<leader>mq', function()
+  vim.api.nvim_set_current_line '# %% [markdown]'
+end)
+-- vim.keymap.set('n', '<leader>q', function()
+--   -- 1. Get the current cursor row (1-indexed)
+--   local row = vim.api.nvim_win_get_cursor(0)[1]
+--
+--   local lines = {
+--     '``` {python}',
+--     '',
+--     '```',
+--   }
+--
+--   -- 2. Replace the current line with the code block
+--   -- (Using row-1 because the buffer API is 0-indexed)
+--   vim.api.nvim_buf_set_lines(0, row - 1, row, false, lines)
+--
+--   -- 3. Set the cursor exactly to the empty middle line
+--   -- (The original line is 'row', so the middle line is 'row + 1')
+--   vim.api.nvim_win_set_cursor(0, { row + 1, 0 })
+--
+--   -- 4. Enter insert mode at the end of the line to respect auto-indent
+--   -- vim.cmd 'startinsert!'
+-- end, { desc = 'Insert Python code block exactly at cursor' })

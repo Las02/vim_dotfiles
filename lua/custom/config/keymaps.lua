@@ -44,17 +44,17 @@ end
 --   }
 -- end)
 
-vim.keymap.set('n', '<leader>as', function()
-  showSymbol {
-    symbols = {
-      'interface',
-      'class',
-      'constructor',
-      'method',
-      'function',
-    },
-  }
-end)
+-- vim.keymap.set('n', '<leader>as', function()
+--   showSymbol {
+--     symbols = {
+--       'interface',
+--       'class',
+--       'constructor',
+--       'method',
+--       'function',
+--     },
+--   }
+-- end)
 
 -- vim.keymap.set('n', 'z', 'za')
 -- vim.keymap.set('v', '<', '<<')
@@ -71,13 +71,13 @@ end)
 -- vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 --
 --
-MARKS = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' }
-MARK_TO_SET = 1
-vim.keymap.set('n', '<leader>am', function()
-  -- print(vim.inspect(MARKS[MARK_TO_SET]))
-  vim.cmd('normal! m' .. MARKS[MARK_TO_SET])
-  MARK_TO_SET = 1 + MARK_TO_SET
-end)
+-- MARKS = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' }
+-- MARK_TO_SET = 1
+-- vim.keymap.set('n', '<leader>am', function()
+--   -- print(vim.inspect(MARKS[MARK_TO_SET]))
+--   vim.cmd('normal! m' .. MARKS[MARK_TO_SET])
+--   MARK_TO_SET = 1 + MARK_TO_SET
+-- end)
 
 -- vim.keymap.set('n', 'gd', function()
 --   vim.lsp.buf.definition()

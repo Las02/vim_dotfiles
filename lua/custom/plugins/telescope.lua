@@ -6,7 +6,7 @@ return {
       -- { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
       { '<leader>j', '<cmd>Telescope buffers<cr>', desc = 'Find Files' },
       { '<leader>o', '<cmd>Telescope oldfiles<cr>', desc = 'Find Files' },
-      { '<leader>aa', '<cmd>Telescope commands<cr>', desc = 'Find Files' },
+      -- { '<leader>aa', '<cmd>Telescope commands<cr>', desc = 'Find Files' },
       -- {
       --   '<leader>c',
       --   function()
